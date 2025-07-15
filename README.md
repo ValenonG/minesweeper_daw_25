@@ -1,4 +1,4 @@
-# Version: 1.0
+# Version: 1.1
 # Final Project - Minesweeper
 This project is a recreation of the classic **Minesweeper** game.
 
@@ -14,10 +14,7 @@ This project is a recreation of the classic **Minesweeper** game.
 - Git & GitHub 
 
 ## Project Structure
-/css/
-style.css
-/js/
-main.js
-/img/
-index.html
-
+-/css/style.css
+-/scripts/main.js
+-index.html
+-README.md
