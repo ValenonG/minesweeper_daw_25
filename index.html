@@ -10,14 +10,15 @@
 <body>
   <h1>Minesweeper Game</h1>
   <div id="difficulty-buttons">
-    <button onclick="generateTable(8, 8)">Easy (8x8)</button>
-    <button onclick="generateTable(12, 12)">Medium (12x12)</button>
-    <button onclick="generateTable(16, 16)">Hard (16x16)</button>
+    <button onclick="generateTable(8, 8,10)">Easy (8x8)</button>
+    <button onclick="generateTable(12, 12, 25)">Medium (12x12)</button>
+    <button onclick="generateTable(16, 16, 40)">Hard (16x16)</button>
     <button onclick="showCustomForm()">Customized</button>
   </div>
   <div id="custom-form">
     <input type="number" id="custom-rows" placeholder="Rows" min="1">
     <input type="number" id="custom-cols" placeholder="Columns" min="1">
+    <input type="number" id="custom-mines" placeholder="Mines" min="1">
     <button onclick="setCustomDifficulty()">Generate</button>
   </div>
 
