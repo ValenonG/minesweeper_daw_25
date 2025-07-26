@@ -17,3 +17,26 @@ td {
   cursor: pointer;
 }
 
+.custom-form {
+  display: none;
+  margin-top: 10px;
+}
+
+#error-modal {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+#error-modal .modal-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 200px;
+  max-width: 400px;
+  border: #333 solid 2px;
+}
+
+
