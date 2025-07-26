@@ -12,7 +12,7 @@ function setCustomDifficulty() {
     const cols = parseInt(document.getElementById("custom-cols").value, 10);
 
     if (isNaN(rows) || isNaN(cols) || rows <= 0 || cols <= 0) {
-        showModal("Por favor ingresa números positivos para filas y columnas.");
+        showModal("Enter positive numbers for rows and columns.");
         return;
     }
 
