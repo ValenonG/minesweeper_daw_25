@@ -36,6 +36,31 @@ function closeModal() {
     document.getElementById("error-modal").style.display = "none";
 }
 
+function calculateAdjacentMines(rows, cols) {
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            if (!board[i][j].isMine) {
+                board[i][j].adjacentMines = countAdjacentMines(i, j);
+            }
+        }
+    }
+}
+
+function countAdjacentMines(row, col) {
+    var count = 0;
+    for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+            if (i === 0 && j === 0) continue;
+            var r = row + i;
+            var c = col + j;
+            if (r >= 0 && r < board.length && c >= 0 && c < board[0].length) {
+                if (board[r][c].isMine) count++;
+            }
+        }
+    }
+    return count;
+}
+
 function placeMines(rows, cols, mines) {
     var placed = 0;
 
@@ -72,8 +97,17 @@ function generateTable(rows, cols, mines) {
                 if (cell.isMine) {
                     cell.element.textContent = "💣";
                     cell.element.style.backgroundColor = "#ff1900ff";
+
                 } else {
+                    const adjacentMines = cell.adjacentMines;
                     cell.element.style.backgroundColor = "#888";
+                    if (adjacentMines > 0) {
+                        cell.element.textContent = adjacentMines;
+                        cell.element.style.color = adjacentMines === 1 ? "blue" :
+                                                   adjacentMines === 2 ? "green" :
+                                                   adjacentMines === 3 ? "red" :
+                                                   adjacentMines === 4 ? "purple" : "black";
+                    }
                 }
 
                 this.style.pointerEvents = "none";
@@ -90,6 +124,8 @@ function generateTable(rows, cols, mines) {
 
     container.appendChild(table);
     placeMines(rows, cols, mines);
+    calculateAdjacentMines(rows, cols);
+
 }
 
 document.getElementById("custom-form").style.display = "none";
