@@ -9,7 +9,17 @@
     <script src="./scripts/main.js" defer></script>
 </head>
 <body>
-  <h1>Minesweeper Game</h1>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <h1  class="navbar-title">Minesweeper</h1>
+      <ul class="navbar-links">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Ranking</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
   <div id="difficulty-buttons">
     <button onclick="generateTable(8, 8,10)">Easy (8x8x10)</button>
     <button onclick="generateTable(12, 12, 25)">Medium (12x12x25)</button>
