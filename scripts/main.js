@@ -112,15 +112,34 @@ function generateTable(rows, cols, mines) {
 
                 this.style.pointerEvents = "none";
             });
+            td.addEventListener("contextmenu", function (event) {
+                event.preventDefault();
+                var row = parseInt(this.dataset.row);
+                var col = parseInt(this.dataset.col);
+                var cell = board[row][col];
+
+                if (!cell.isFlagged) {
+                    cell.isFlagged = true;
+                    this.textContent = "🚩";
+                    this.style.backgroundColor = "#ffcc00";
+                } else {
+                    cell.isFlagged = false;
+                    this.textContent = "";
+                    this.style.backgroundColor = "";
+                }
+            });
 
             tr.appendChild(td);
             board[i][j] = {
                 isMine: false,
+                isFlagged: false,
                 element: td,
             };
         }
         table.appendChild(tr);
     }
+    
+
 
     container.appendChild(table);
     placeMines(rows, cols, mines);
