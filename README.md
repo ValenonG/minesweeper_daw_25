@@ -14,6 +14,7 @@ This project is a recreation of the classic **Minesweeper** game.
 - Git & GitHub 
 
 ## Project Structure
+-/css/normalize.css
 -/css/style.css
 -/scripts/main.js
 -index.html
