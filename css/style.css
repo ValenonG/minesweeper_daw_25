@@ -15,6 +15,7 @@ td {
   border: 1px solid #333;
   background-color: #ccc;
   cursor: pointer;
+  user-select: none;
 }
 
 .custom-form {
