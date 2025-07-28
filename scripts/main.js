@@ -36,16 +36,6 @@ function closeModal() {
     document.getElementById("error-modal").style.display = "none";
 }
 
-function calculateAdjacentMines(rows, cols) {
-    for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < cols; j++) {
-            if (!board[i][j].isMine) {
-                board[i][j].adjacentMines = countAdjacentMines(i, j);
-            }
-        }
-    }
-}
-
 function countAdjacentMines(row, col) {
     var count = 0;
     for (var i = -1; i <= 1; i++) {
@@ -59,6 +49,43 @@ function countAdjacentMines(row, col) {
         }
     }
     return count;
+}
+
+function calculateAdjacentMines(rows, cols) {
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            if (!board[i][j].isMine) {
+                board[i][j].adjacentMines = countAdjacentMines(i, j);
+            }
+        }
+    }
+}
+
+function revealEmptyCells(row, col) {
+    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) return;
+
+    var cell = board[row][col];
+    if (cell.revealed || cell.isFlagged) return;
+
+    cell.revealed = true;
+    cell.element.style.backgroundColor = "#888";
+    cell.element.style.pointerEvents = "none";
+
+    if (cell.adjacentMines > 0) {
+        cell.element.textContent = cell.adjacentMines;
+        cell.element.style.color = cell.adjacentMines === 1 ? "blue" :
+                                   cell.adjacentMines === 2 ? "green" :
+                                   cell.adjacentMines === 3 ? "red" :
+                                   cell.adjacentMines === 4 ? "purple" : "black";
+        return;
+    }
+
+    for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+            if (i === 0 && j === 0) continue;
+            revealEmptyCells(row + i, col + j);
+        }
+    }
 }
 
 function placeMines(rows, cols, mines) {
@@ -99,14 +126,19 @@ function generateTable(rows, cols, mines) {
                     cell.element.style.backgroundColor = "#ff1900ff";
 
                 } else {
-                    var adjacentMines = cell.adjacentMines;
-                    cell.element.style.backgroundColor = "#888";
-                    if (adjacentMines > 0) {
-                        cell.element.textContent = adjacentMines;
-                        cell.element.style.color = adjacentMines === 1 ? "blue" :
-                                                   adjacentMines === 2 ? "green" :
-                                                   adjacentMines === 3 ? "red" :
-                                                   adjacentMines === 4 ? "purple" : "black";
+                    if (cell.revealed || cell.isFlagged) return;
+
+                    if (cell.adjacentMines === 0) {
+                        revealEmptyCells(row, col);
+                    } else {
+                        cell.revealed = true;
+                        cell.element.style.backgroundColor = "#888";
+                        cell.element.textContent = cell.adjacentMines;
+                        cell.element.style.pointerEvents = "none";
+                        cell.element.style.color = cell.adjacentMines === 1 ? "blue" :
+                                                cell.adjacentMines === 2 ? "green" :
+                                                cell.adjacentMines === 3 ? "red" :
+                                                cell.adjacentMines === 4 ? "purple" : "black";
                     }
                 }
 
@@ -133,13 +165,12 @@ function generateTable(rows, cols, mines) {
             board[i][j] = {
                 isMine: false,
                 isFlagged: false,
+                revealed: false,
                 element: td,
             };
         }
         table.appendChild(tr);
     }
-    
-
 
     container.appendChild(table);
     placeMines(rows, cols, mines);
