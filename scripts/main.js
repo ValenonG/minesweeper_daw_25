@@ -131,6 +131,18 @@ function placeMines(rows, cols, mines) {
     }
 }
 
+function revealAllMines() {
+    for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board[i].length; j++) {
+            if (board[i][j].isMine) {
+                board[i][j].element.textContent = "💣";
+                board[i][j].element.style.backgroundColor = "#ff8080";
+            }
+        }
+    }
+}
+
+
 function generateTable(rows, cols, mines) {
     container.innerHTML = "";
     board = [];
@@ -165,6 +177,8 @@ function generateTable(rows, cols, mines) {
                     cell.element.style.backgroundColor = "#ff1900ff";
                     stopTimer();
                     gameOver = true;
+                    showGameResult("💥 ¡Perdiste!");
+                    revealAllMines();
                 } else {
                     if (cell.adjacentMines === 0) {
                         revealEmptyCells(row, col);
@@ -179,6 +193,7 @@ function generateTable(rows, cols, mines) {
                                                    cell.adjacentMines === 4 ? "purple" : "black";
                     }
                 }
+                checkWin();
             });
 
             td.addEventListener("contextmenu", function (event) {
@@ -233,3 +248,28 @@ document.addEventListener("keydown", function (e) {
 resetButton.addEventListener("click", function () {
     generateTable(8, 8, 10);
 });
+
+function checkWin() {
+    var unrevealed = 0;
+    for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board[i].length; j++) {
+            if (!board[i][j].revealed && !board[i][j].isMine) {
+                unrevealed++;
+            }
+        }
+    }
+    if (unrevealed === 0 && !gameOver) {
+        stopTimer();
+        gameOver = true;
+        showGameResult("🏆 ¡Ganaste!");
+    }
+}
+
+function showGameResult(message) {
+    document.getElementById("game-result-title").textContent = message;
+    document.getElementById("game-result-modal").style.display = "flex";
+}
+
+function closeGameResult() {
+    document.getElementById("game-result-modal").style.display = "none";
+}
