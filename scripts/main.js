@@ -263,14 +263,17 @@ function checkWin() {
         stopTimer();
         gameOver = true;
         showGameResult("🏆 ¡Ganaste!");
+        saveGame();
     }
 }
 
 function showGameResult(message) {
     document.getElementById("game-result-title").textContent = message;
     document.getElementById("game-result-modal").style.display = "flex";
+}
 
-    if (playerName !== "") {
+function saveGame(){
+        if (playerName !== "") {
         var game = {
             name: playerName,
             duration: secondsElapsed,
