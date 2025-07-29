@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/style.css" />
   <script src="./scripts/main.js" defer></script>
   <script src="./scripts/navbar.js" defer></script>
+  <script src="./scripts/confetti.js" defer></script>
 </head>
 <body>
   <nav class="navbar">
@@ -99,6 +100,8 @@
       <button onclick="closeGameResult()" class="submit-btn">Close</button>
     </div>
   </div>
-
+  <audio id="win-sound" src="./sounds/winsound.mp3" preload="auto"></audio>
+  <audio id="lose-sound" src="./sounds/losesound.mp3" preload="auto"></audio>
+  <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;"></canvas>
 </body>
 </html>
