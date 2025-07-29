@@ -12,6 +12,7 @@ var flagsPlaced = 0;
 var secondsElapsed = 0;
 var timerStarted = false;
 var gameOver = false;
+var playerName = "";
 
 function startTimer() {
     if (timerStarted) return;
@@ -131,6 +132,18 @@ function placeMines(rows, cols, mines) {
     }
 }
 
+function revealAllMines() {
+    for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board[i].length; j++) {
+            if (board[i][j].isMine) {
+                board[i][j].element.textContent = "💣";
+                board[i][j].element.style.backgroundColor = "#ff8080";
+            }
+        }
+    }
+}
+
+
 function generateTable(rows, cols, mines) {
     container.innerHTML = "";
     board = [];
@@ -165,6 +178,8 @@ function generateTable(rows, cols, mines) {
                     cell.element.style.backgroundColor = "#ff1900ff";
                     stopTimer();
                     gameOver = true;
+                    showGameResult("💥 ¡Perdiste!");
+                    revealAllMines();
                 } else {
                     if (cell.adjacentMines === 0) {
                         revealEmptyCells(row, col);
@@ -179,6 +194,7 @@ function generateTable(rows, cols, mines) {
                                                    cell.adjacentMines === 4 ? "purple" : "black";
                     }
                 }
+                checkWin();
             });
 
             td.addEventListener("contextmenu", function (event) {
@@ -221,7 +237,7 @@ function generateTable(rows, cols, mines) {
 }
 
 document.getElementById("custom-form").style.display = "none";
-generateTable(8, 8, 10);
+askPlayerName();
 
 document.addEventListener("keydown", function (e) {
     if (e.code === "Space") {
@@ -233,3 +249,70 @@ document.addEventListener("keydown", function (e) {
 resetButton.addEventListener("click", function () {
     generateTable(8, 8, 10);
 });
+
+function checkWin() {
+    var unrevealed = 0;
+    for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board[i].length; j++) {
+            if (!board[i][j].revealed && !board[i][j].isMine) {
+                unrevealed++;
+            }
+        }
+    }
+    if (unrevealed === 0 && !gameOver) {
+        stopTimer();
+        gameOver = true;
+        showGameResult("🏆 ¡Ganaste!");
+    }
+}
+
+function showGameResult(message) {
+    document.getElementById("game-result-title").textContent = message;
+    document.getElementById("game-result-modal").style.display = "flex";
+
+    if (playerName !== "") {
+        var partida = {
+            nombre: playerName,
+            duracion: secondsElapsed,
+            fecha: getFormattedDateTime()
+        };
+
+    var partidas = JSON.parse(localStorage.getItem("minesweeperRanking")) || [];
+    partidas.push(partida);
+    localStorage.setItem("minesweeperRanking", JSON.stringify(partidas));
+    //console.log(partida)
+    }
+}
+
+function getFormattedDateTime() {
+    var now = new Date();
+    var fecha = now.getFullYear() + "-" + 
+        pad2(now.getMonth() + 1) + "-" + 
+        pad2(now.getDate());
+    var hora = pad2(now.getHours()) + ":" + pad2(now.getMinutes());
+    return fecha + " " + hora;
+}
+
+function pad2(n) {
+    return n < 10 ? "0" + n : "" + n;
+}
+
+function closeGameResult() {
+    document.getElementById("game-result-modal").style.display = "none";
+}
+
+function askPlayerName() {
+    document.getElementById("player-modal").style.display = "flex";
+}
+
+function savePlayerName() {
+    var input = document.getElementById("player-name").value.trim();
+    if (!/^[a-zA-Z0-9 ]{3,}$/.test(input)) {
+        showModal("Name must be at least 3 alphanumeric characters.");
+        return;
+    }
+    playerName = input;
+    document.getElementById("player-modal").style.display = "none";
+    generateTable(8, 8, 10);
+    //console.log(playerName)
+}

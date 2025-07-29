@@ -1,3 +1,4 @@
+"use strict";
 var contactForm = document.getElementById("contact-form");
 var contactModal = document.getElementById("contact-modal");
 
