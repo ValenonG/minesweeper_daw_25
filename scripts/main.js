@@ -14,6 +14,9 @@ var timerStarted = false;
 var gameOver = false;
 var playerName = "";
 
+var loseSound = document.getElementById("lose-sound");
+var winSound = document.getElementById("win-sound");
+
 function startTimer() {
     if (timerStarted) return;
     timerStarted = true;
@@ -174,7 +177,6 @@ function generateTable(rows, cols, mines) {
                 if (cell.revealed || cell.isFlagged || gameOver) return;
 
                 if (cell.isMine) {
-                    var loseSound = document.getElementById("lose-sound");
                     cell.element.textContent = "💣";
                     cell.element.style.backgroundColor = "#ff1900ff";
                     stopTimer();
@@ -262,7 +264,6 @@ function checkWin() {
         }
     }
     if (unrevealed === 0 && !gameOver) {
-        var winSound = document.getElementById("win-sound");
         stopTimer();
         gameOver = true;
         showGameResult("🏆 ¡Ganaste!");
@@ -307,6 +308,10 @@ function pad2(n) {
 
 function closeGameResult() {
     document.getElementById("game-result-modal").style.display = "none";
+    winSound.pause();
+    winSound.currentTime = 0;
+    loseSound.pause();
+    loseSound.currentTime = 0;
 }
 
 function askPlayerName() {
