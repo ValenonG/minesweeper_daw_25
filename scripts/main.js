@@ -174,11 +174,13 @@ function generateTable(rows, cols, mines) {
                 if (cell.revealed || cell.isFlagged || gameOver) return;
 
                 if (cell.isMine) {
+                    var loseSound = document.getElementById("lose-sound");
                     cell.element.textContent = "💣";
                     cell.element.style.backgroundColor = "#ff1900ff";
                     stopTimer();
                     gameOver = true;
                     showGameResult("💥 ¡Perdiste!");
+                    loseSound.play();
                     revealAllMines();
                 } else {
                     if (cell.adjacentMines === 0) {
@@ -260,10 +262,13 @@ function checkWin() {
         }
     }
     if (unrevealed === 0 && !gameOver) {
+        var winSound = document.getElementById("win-sound");
         stopTimer();
         gameOver = true;
         showGameResult("🏆 ¡Ganaste!");
         saveGame();
+        launchConfetti();
+        winSound.play();
     }
 }
 
