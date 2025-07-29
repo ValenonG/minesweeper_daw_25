@@ -271,26 +271,26 @@ function showGameResult(message) {
     document.getElementById("game-result-modal").style.display = "flex";
 
     if (playerName !== "") {
-        var partida = {
-            nombre: playerName,
-            duracion: secondsElapsed,
-            fecha: getFormattedDateTime()
+        var game = {
+            name: playerName,
+            duration: secondsElapsed,
+            date: getFormattedDateTime()
         };
 
-    var partidas = JSON.parse(localStorage.getItem("minesweeperRanking")) || [];
-    partidas.push(partida);
-    localStorage.setItem("minesweeperRanking", JSON.stringify(partidas));
-    //console.log(partida)
+    var games = JSON.parse(localStorage.getItem("minesweeperRanking")) || [];
+    games.push(game);
+    localStorage.setItem("minesweeperRanking", JSON.stringify(games));
+    //console.log(game)
     }
 }
 
 function getFormattedDateTime() {
     var now = new Date();
-    var fecha = now.getFullYear() + "-" + 
+    var date = now.getFullYear() + "-" + 
         pad2(now.getMonth() + 1) + "-" + 
         pad2(now.getDate());
-    var hora = pad2(now.getHours()) + ":" + pad2(now.getMinutes());
-    return fecha + " " + hora;
+    var hour = pad2(now.getHours()) + ":" + pad2(now.getMinutes());
+    return date + " " + hour;
 }
 
 function pad2(n) {

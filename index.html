@@ -31,6 +31,18 @@
     </div>
   </div>
 
+  <div class="modal" id="ranking-modal">
+    <div class="modal-content">
+      <h2>🏅 Ranking</h2>
+      <span onclick="closeRankingModal()" class="close-modal" id="close-modal">&times;</span> 
+      <select id="ranking-order" onchange="renderRanking()">
+        <option value="duration">Duration</option>
+        <option value="date"> Date</option>
+      </select>
+      <div id="ranking-list"></div>
+    </div>
+  </div>
+
   <div id="difficulty-buttons">
     <button onclick="generateTable(8, 8, 10)">Easy (8x10)</button>
     <button onclick="generateTable(12, 12, 25)">Medium (12x25)</button>
@@ -45,11 +57,11 @@
     <button onclick="setCustomDifficulty()">Generate</button>
   </div>
 
- <div id="game-info">
-  <div id="mine-counter">Mines: 0</div>
-  <button id="reset-button" title="Restart Game">😀</button>
-  <div id="timer">Time: 0s</div>
-</div>
+  <div id="game-info">
+    <div id="mine-counter">Mines: 0</div>
+      <button id="reset-button" title="Restart Game">😀</button>
+    <div id="timer">Time: 0s</div>
+  </div>
 
 
   <div id="table-container"></div>
@@ -80,11 +92,13 @@
       </form>
     </div>
   </div>
+
   <div id="game-result-modal" class="modal">
     <div class="modal-content">
       <h2 id="game-result-title"></h2>
       <button onclick="closeGameResult()" class="submit-btn">Close</button>
     </div>
   </div>
+
 </body>
 </html>
