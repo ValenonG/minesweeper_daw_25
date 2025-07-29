@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minesweeper</title>
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="./scripts/main.js" defer></script>
-    <script src="./scripts/navbar.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="./css/normalize.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="./scripts/main.js" defer></script>
+  <script src="./scripts/navbar.js" defer></script>
 </head>
 <body>
   <nav class="navbar">
@@ -30,15 +30,22 @@
   </div>
 
   <div id="custom-form">
-    <input type="number" id="custom-rows" placeholder="Rows" min="1">
-    <input type="number" id="custom-cols" placeholder="Columns" min="1">
-    <input type="number" id="custom-mines" placeholder="Mines" min="1">
+    <input type="number" id="custom-rows" placeholder="Rows" min="1" />
+    <input type="number" id="custom-cols" placeholder="Columns" min="1" />
+    <input type="number" id="custom-mines" placeholder="Mines" min="1" />
     <button onclick="setCustomDifficulty()">Generate</button>
   </div>
 
+ <div id="game-info">
+  <div id="mine-counter">Mines: 0</div>
+  <button id="reset-button" title="Restart Game">😀</button>
+  <div id="timer">Time: 0s</div>
+</div>
+
+
   <div id="table-container"></div>
 
-  <div class="error-modal" id="error-modal" >
+  <div class="error-modal" id="error-modal">
     <div class="modal-content">
       <span onclick="closeModal()" class="close-modal" id="close-modal">&times;</span>
       <p class="error-title">⚠️ERROR⚠️</p>
@@ -46,8 +53,7 @@
     </div>
   </div>
 
-<!-- Contact modal -->
-  <div class="modal" id="contact-modal" >
+  <div class="modal" id="contact-modal">
     <div class="modal-content">
       <h2>Contact Us</h2>
       <span onclick="closeModalContact()" class="close-modal" id="close-contact">&times;</span>
