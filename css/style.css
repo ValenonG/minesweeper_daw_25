@@ -192,6 +192,40 @@ label {
   background-color: #444;
 }
 
+#ranking-list {
+  max-height: 500px;
+  overflow-y: auto;
+  font-size: 18px;
+  text-align: left;
+}
+
+#ranking-order {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #292929;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  color: #292929;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#ranking-order:focus {
+  box-shadow: 0 0 5px #29292980;
+}
+
+#ranking-list ol {
+  padding-left: 20px;
+}
+
+#ranking-list li {
+  margin-bottom: 6px;
+}
+.ranking-duration {
+  color: #0074cc;
+}
+
 @media (min-width: 600px) {
   #difficulty-buttons {
     flex-direction: row;

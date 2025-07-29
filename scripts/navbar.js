@@ -39,11 +39,57 @@ contactForm.onsubmit = function (e) {
         "mailto:Minesweeper@help.com" +
         "?subject=" + encodeURIComponent("Contact from Minesweeper") +
         "&body=" + encodeURIComponent(
-        "Hola! mi nombre es " + name + " " +
-        "y me estoy comunicando con ustedes por la siguiente razón : " + message
+        "Hello, my name is " + name + " " +
+        "and I want to communicate with you for the following reason: " + message
     );
 
     contactForm.reset();
     window.location.href = mailto;
     contactModal.style.display = "none";
 };
+
+function openRankingModal() {
+  document.getElementById("ranking-modal").style.display = "flex";
+  renderRanking();
+}
+
+function renderRanking() {
+    var rankingList = document.getElementById("ranking-list");
+    var order = document.getElementById("ranking-order").value;
+
+    var games = JSON.parse(localStorage.getItem("minesweeperRanking")) || [];
+
+    if (games.length === 0) {
+        rankingList.innerHTML = "<p>There are no registered games.</p>";
+        return;
+    }
+
+    if (order === "duration") {
+        games.sort(function (a, b) {
+        return a.duration - b.duration;
+        });
+    } else if (order === "date") {
+        games.sort(function (a, b) {
+        return b.date.localeCompare(a.date);
+        });
+    }
+
+    var html = "<ol>";
+    for (var i = 0; i < games.length; i++) {
+        var g = games[i];
+        html += "<li><strong>" + g.name + "</strong> - " +
+        "<span class='ranking-duration'>" + g.duration + "s </span> - " +
+        g.date + "</li>";
+    }
+    html += "</ol>";
+
+    rankingList.innerHTML = html;
+}
+
+function closeRankingModal() {
+    document.getElementById("ranking-modal").style.display = "none";
+}
+
+document.getElementById("navbar-ranking").addEventListener("click", function () {
+    openRankingModal();
+});
