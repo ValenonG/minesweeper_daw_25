@@ -49,8 +49,8 @@ contactForm.onsubmit = function (e) {
 };
 
 function openRankingModal() {
-  document.getElementById("ranking-modal").style.display = "flex";
-  renderRanking();
+    document.getElementById("ranking-modal").style.display = "flex";
+    renderRanking();
 }
 
 function renderRanking() {
