@@ -17,10 +17,17 @@
         <li><a href="#" id="navbar-about">About</a></li>
         <li><a href="#" id="navbar-ranking">Ranking</a></li>
         <li><a href="#" id="navbar-contact">Contact</a></li>
-        <li><a href="#" id="navbar-register">Sign In</a></li>
       </ul>
     </div>
   </nav>
+
+  <div class="modal" id="player-modal">
+    <div class="modal-content">
+      <h2>Enter your name for play :D</h2>
+      <input type="text" id="player-name" placeholder="Your name (min 3 letters)" />
+      <button onclick="savePlayerName()" class="submit-btn">Start Game</button>
+    </div>
+  </div>
 
   <div id="difficulty-buttons">
     <button onclick="generateTable(8, 8, 10)">Easy (8x10)</button>
