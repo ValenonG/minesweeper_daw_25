@@ -1,34 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minesweeper</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="./scripts/main.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="./css/normalize.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="./scripts/main.js" defer></script>
+  <script src="./scripts/navbar.js" defer></script>
 </head>
 <body>
-  <h1>Minesweeper Game</h1>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <h1 class="navbar-title">Minesweeper</h1>
+      <ul class="navbar-links">
+        <li><a href="#" id="navbar-about">About</a></li>
+        <li><a href="#" id="navbar-ranking">Ranking</a></li>
+        <li><a href="#" id="navbar-contact">Contact</a></li>
+        <li><a href="#" id="navbar-register">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div id="difficulty-buttons">
-    <button onclick="generateTable(8, 8,10)">Easy (8x8x10)</button>
-    <button onclick="generateTable(12, 12, 25)">Medium (12x12x25)</button>
-    <button onclick="generateTable(16, 16, 40)">Hard (16x16x40)</button>
+    <button onclick="generateTable(8, 8, 10)">Easy (8x10)</button>
+    <button onclick="generateTable(12, 12, 25)">Medium (12x25)</button>
+    <button onclick="generateTable(16, 16, 40)">Hard (16x40)</button>
     <button onclick="showCustomForm()">Customized</button>
   </div>
+
   <div id="custom-form">
-    <input type="number" id="custom-rows" placeholder="Rows" min="1">
-    <input type="number" id="custom-cols" placeholder="Columns" min="1">
-    <input type="number" id="custom-mines" placeholder="Mines" min="1">
+    <input type="number" id="custom-rows" placeholder="Rows" min="1" />
+    <input type="number" id="custom-cols" placeholder="Columns" min="1" />
+    <input type="number" id="custom-mines" placeholder="Mines" min="1" />
     <button onclick="setCustomDifficulty()">Generate</button>
   </div>
 
+ <div id="game-info">
+  <div id="mine-counter">Mines: 0</div>
+  <button id="reset-button" title="Restart Game">😀</button>
+  <div id="timer">Time: 0s</div>
+</div>
+
+
   <div id="table-container"></div>
 
-  <div id="error-modal">
+  <div class="error-modal" id="error-modal">
     <div class="modal-content">
-      <span id="error-message"></span>
-      <br>
-      <button onclick="closeModal()">Cerrar</button>
+      <span onclick="closeModal()" class="close-modal" id="close-modal">&times;</span>
+      <p class="error-title">⚠️ERROR⚠️</p>
+      <span id="error-message" class="error-message"></span>
+    </div>
+  </div>
+
+  <div class="modal" id="contact-modal">
+    <div class="modal-content">
+      <h2>Contact Us</h2>
+      <span onclick="closeModalContact()" class="close-modal" id="close-contact">&times;</span>
+      <form id="contact-form" action="mailto:" method="POST" novalidate>
+        <label for="contact-name">Name:</label>
+        <input type="text" id="contact-name" name="name" />
+
+        <label for="contact-email">Email:</label>
+        <input type="email" id="contact-email" name="email" />
+
+        <label for="contact-message">Message:</label>
+        <textarea id="contact-message" name="message" rows="3"></textarea>
+
+        <button type="submit" class="submit-btn">Send</button>
+      </form>
     </div>
   </div>
 </body>

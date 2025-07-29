@@ -1,7 +1,89 @@
 body {
   font-family: sans-serif;
   text-align: center;
-  padding: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar {
+  background-color: #292929;
+  padding: 10px 20px;
+  color: #fff;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.navbar-title {
+  font-weight: bold;
+  font-size: 25px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navbar-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar-links li a:hover {
+  color: #a5a4a4;
+  font-size: 17px;
+  transition: 150ms;
+}
+
+#difficulty-buttons {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+#difficulty-buttons button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #292929;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+}
+
+#custom-form {
+  display: none;
+  margin-top: 10px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 18px;
+  color: #292929;
 }
 
 table {
@@ -18,26 +100,118 @@ td {
   user-select: none;
 }
 
-.custom-form {
-  display: none;
-  margin-top: 10px;
-}
-
-#error-modal {
+.modal,
+.error-modal {
   display: none;
   position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
   justify-content: center;
   align-items: center;
-  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #00000099;
+  z-index: 100;
 }
 
-#error-modal .modal-content {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 200px;
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 90%;
   max-width: 400px;
-  border: #333 solid 2px;
+  border: 2px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
 }
 
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 25px;
+  cursor: pointer;
+  color: #333;
+}
 
+.close-modal:hover {
+  color: #e40606;
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+.error-title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #b30000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #666;
+  outline: none;
+  box-shadow: 0 0 5px rgba(41, 41, 41, 0.5);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  text-align: left;
+  color: #292929;
+  margin-bottom: 4px;
+}
+
+.submit-btn {
+  background-color: #292929;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #444;
+}
+
+@media (min-width: 600px) {
+  #difficulty-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  #game-info {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-links {
+    flex-direction: row;
+    gap: 20px;
+  }
+}
