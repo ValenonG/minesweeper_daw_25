@@ -108,7 +108,10 @@ td {
   justify-content: center;
   align-items: center;
   background-color: #00000099;
-  z-index: 100;
+}
+
+.error-modal{
+  z-index: 9999;
 }
 
 .modal-content {
