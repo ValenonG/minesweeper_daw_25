@@ -104,8 +104,7 @@ function revealEmptyCells(row, col) {
 
     cell.revealed = true;
     cell.element.style.backgroundColor = "#888";
-    cell.element.style.pointerEvents = "none";
-
+ 
     if (cell.adjacentMines > 0) {
         cell.element.textContent = cell.adjacentMines;
         cell.element.style.color = cell.adjacentMines === 1 ? "blue" :
@@ -146,6 +145,52 @@ function revealAllMines() {
     }
 }
 
+function performChord(row, col) {
+    var cell = board[row][col];
+    if (!cell.revealed || cell.adjacentMines === 0 || gameOver) {
+        return;
+    }
+
+    var adjacentFlags = 0;
+    for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+            if (i === 0 && j === 0) continue;
+            var r = row + i;
+            var c = col + j;
+            if (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c].isFlagged) {
+                adjacentFlags++;
+            }
+        }
+    }
+
+    if (adjacentFlags === cell.adjacentMines) {
+        for (var i = -1; i <= 1; i++) {
+            for (var j = -1; j <= 1; j++) {
+                if (i === 0 && j === 0) continue;
+                var r = row + i;
+                var c = col + j;
+
+                if (r >= 0 && r < board.length && c >= 0 && c < board[0].length) {
+                    var neighborCell = board[r][c];
+                    if (!neighborCell.isFlagged && !neighborCell.revealed) {
+                        if (neighborCell.isMine) {
+                            gameOver = true;
+                            stopTimer();
+                            revealAllMines(); 
+                            board[r][c].element.style.backgroundColor = "#ff1900ff";
+                            resetButton.textContent = "😭";
+                            loseSound.play();
+                            showGameResult("💥 Nice Try, but you lost!");
+                            return; 
+                        } else {
+                            revealEmptyCells(r, c);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 function generateTable(rows, cols, mines) {
     container.innerHTML = "";
@@ -175,32 +220,27 @@ function generateTable(rows, cols, mines) {
                 var col = parseInt(this.dataset.col);
                 var cell = board[row][col];
 
-                if (cell.revealed || cell.isFlagged || gameOver) return;
+                if (cell.isFlagged || gameOver) return;
 
-                if (cell.isMine) {
-                    cell.element.textContent = "💣";
-                    cell.element.style.backgroundColor = "#ff1900ff";
-                    stopTimer();
-                    gameOver = true;
-                    showGameResult("💥 Nice Try, but you lost!");
-                    resetButton.textContent = "😭";
-                    loseSound.play();
-                    revealAllMines();
+                if (cell.revealed) {
+                    performChord(row, col);
                 } else {
-                    if (cell.adjacentMines === 0) {
-                        revealEmptyCells(row, col);
+                    if (cell.isMine) {
+                        cell.element.textContent = "💣";
+                        cell.element.style.backgroundColor = "#ff1900ff";
+                        stopTimer();
+                        gameOver = true;
+                        showGameResult("💥 Nice Try, but you lost!");
+                        resetButton.textContent = "😭";
+                        loseSound.play();
+                        revealAllMines();
                     } else {
-                        cell.revealed = true;
-                        cell.element.style.backgroundColor = "#888";
-                        cell.element.textContent = cell.adjacentMines;
-                        cell.element.style.pointerEvents = "none";
-                        cell.element.style.color = cell.adjacentMines === 1 ? "blue" :
-                                                   cell.adjacentMines === 2 ? "green" :
-                                                   cell.adjacentMines === 3 ? "red" :
-                                                   cell.adjacentMines === 4 ? "purple" : "black";
+                        revealEmptyCells(row, col);
                     }
                 }
+                
                 checkWin();
+                
             });
 
             td.addEventListener("contextmenu", function (event) {
