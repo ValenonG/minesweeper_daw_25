@@ -101,3 +101,15 @@ document.getElementById("navbar-about").addEventListener("click", function () {
 function closeAboutModal() {
     document.getElementById("about-modal").style.display = "none";
 }
+
+document.getElementById("toggle-dark").addEventListener("click", function () {
+    var isDark = document.body.classList.toggle("dark-mode");
+    updateDarkModeLabel(isDark);
+});
+
+function updateDarkModeLabel(isDark) {
+    var label = document.getElementById("dark-label");
+    if (label) {
+        label.textContent = isDark ? "🌔 Light Mode" : "🌒 Dark Mode";
+    }
+}

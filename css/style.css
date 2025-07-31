@@ -3,6 +3,7 @@ body {
   text-align: center;
   padding: 0;
   margin: 0;
+  transition: 0.5s;
 }
 
 .navbar {
@@ -125,6 +126,7 @@ td {
   flex-direction: column;
   gap: 10px;
   position: relative;
+  transition: 0.7s;
 }
 
 .close-modal {
@@ -162,7 +164,7 @@ textarea {
   border-radius: 6px;
   font-size: 16px;
   box-sizing: border-box;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: 0.7s;
 }
 
 input:focus,
@@ -212,6 +214,7 @@ label {
   color: #292929;
   box-sizing: border-box;
   cursor: pointer;
+  transition: 0.7s;
 }
 
 #ranking-order:focus {
@@ -255,6 +258,95 @@ label {
 
 .list-about a:hover {
   text-decoration: underline;
+}
+
+.dark-mode {
+background-color: #121212;
+color: #e0e0e0;
+}
+
+.dark-mode .navbar {
+background-color: #1e1e1e;
+color: #e0e0e0;
+}
+
+.dark-mode .navbar-links a {
+color: #e0e0e0;
+}
+
+.dark-mode .navbar-links a:hover {
+color: #bbbbbb;
+}
+
+.dark-mode td {
+background-color: #444;
+border-color: #888;
+color: #fff;
+}
+
+.dark-mode #game-info {
+color: #e0e0e0;
+}
+
+.dark-mode .modal-content,
+.dark-mode .error-modal .modal-content {
+background-color: #1e1e1e;
+color: #e0e0e0;
+border-color: #555;
+}
+
+.dark-mode .close-modal {
+color: #ccc;
+}
+
+.dark-mode .close-modal:hover {
+color: #e40606;
+}
+
+.dark-mode .submit-btn {
+background-color: #333;
+}
+
+.dark-mode .submit-btn:hover {
+background-color: #555;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+background-color: #2a2a2a;
+color: #fff;
+border-color: #555;
+}
+
+.dark-mode label {
+color: #ccc;
+}
+
+.dark-mode #ranking-order {
+background-color: #2a2a2a;
+color: #e0e0e0;
+border-color: #555;
+}
+
+.dark-mode .about {
+color: #e0e0e0;
+}
+
+.dark-mode .about h3 {
+color: #ffffff;
+}
+
+.dark-mode .list-about a {
+color: #66b2ff;
+}
+
+.dark-mode .list-about a:hover {
+color: #aad4ff;
+}
+
+.dark-mode .modal-content {
+background-color: #1e1e1e;
 }
 
 @media (min-width: 600px) {
