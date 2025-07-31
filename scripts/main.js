@@ -157,6 +157,7 @@ function generateTable(rows, cols, mines) {
     stopTimer();
     updateMineCounter();
     timerDisplay.textContent = "Time: 0s";
+    resetButton.textContent = "😀";
 
     var table = document.createElement("table");
 
@@ -181,7 +182,8 @@ function generateTable(rows, cols, mines) {
                     cell.element.style.backgroundColor = "#ff1900ff";
                     stopTimer();
                     gameOver = true;
-                    showGameResult("💥 ¡Perdiste!");
+                    showGameResult("💥 Nice Try, but you lost!");
+                    resetButton.textContent = "😭";
                     loseSound.play();
                     revealAllMines();
                 } else {
@@ -266,7 +268,8 @@ function checkWin() {
     if (unrevealed === 0 && !gameOver) {
         stopTimer();
         gameOver = true;
-        showGameResult("🏆 ¡Ganaste!");
+        showGameResult("🏆 Congratulations, you won!");
+        resetButton.textContent = "😎";
         saveGame();
         launchConfetti();
         winSound.play();
