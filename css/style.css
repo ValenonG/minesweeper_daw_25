@@ -229,6 +229,34 @@ label {
   color: #0074cc;
 }
 
+.about {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.about h3 {
+  font-size: 20px;
+}
+
+.list-about {
+  padding-left: 15px;
+}
+
+.list-about li {
+  margin-bottom: 5px;
+}
+
+.list-about a {
+  color: #0074cc;
+  text-decoration: none;
+}
+
+.list-about a:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 600px) {
   #difficulty-buttons {
     flex-direction: row;

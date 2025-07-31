@@ -93,3 +93,11 @@ function closeRankingModal() {
 document.getElementById("navbar-ranking").addEventListener("click", function () {
     openRankingModal();
 });
+
+document.getElementById("navbar-about").addEventListener("click", function () {
+    document.getElementById("about-modal").style.display = "flex";
+});
+
+function closeAboutModal() {
+    document.getElementById("about-modal").style.display = "none";
+}

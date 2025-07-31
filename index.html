@@ -67,6 +67,31 @@
 
   <div id="table-container"></div>
 
+<div class="modal" id="about-modal">
+  <div class="modal-content">
+    <h2>🕹️ About Minesweeper</h2>
+    <span class="close-modal" onclick="closeAboutModal()">&times;</span>
+    <div class="about">
+      <h3>Rules</h3>
+      <p>
+        Minesweeper rules are very simple. The board is divided into cells, with mines randomly distributed.
+        To win, you need to open all the cells that do not contain mines. 
+        The number on a cell shows the number of mines adjacent to it.
+        Using this information, you can determine safe cells and suspected mine locations. 
+        Cells suspected of being mines can be marked with a flag using the right mouse button.
+      </p>
+      <ul class="list-about">
+        <p><strong>Read more:</strong></p>
+        <li><a href="https://minesweeper.online/help/gameplay" target="_blank">Gameplay</a></li>
+        <li><a href="https://minesweeper.online/help/patterns" target="_blank">Patterns</a></li>
+        <li><a href="https://minesweeper.online/help/efficiency" target="_blank">Efficiency</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
   <div class="error-modal" id="error-modal">
     <div class="modal-content">
       <span onclick="closeModal()" class="close-modal" id="close-modal">&times;</span>
