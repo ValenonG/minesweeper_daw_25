@@ -13,6 +13,10 @@ var secondsElapsed = 0;
 var timerStarted = false;
 var gameOver = false;
 var playerName = "";
+var currentRows = 8;
+var currentCols = 8;
+var currentMines = 10;
+
 
 var loseSound = document.getElementById("lose-sound");
 var winSound = document.getElementById("win-sound");
@@ -199,6 +203,9 @@ function generateTable(rows, cols, mines) {
     flagsPlaced = 0;
     gameOver = false;
     timerStarted = false;
+    currentRows = rows;
+    currentCols = cols;
+    currentMines = mines;
     stopTimer();
     updateMineCounter();
     timerDisplay.textContent = "Time: 0s";
@@ -293,7 +300,7 @@ document.addEventListener("keydown", function (e) {
 });
 
 resetButton.addEventListener("click", function () {
-    generateTable(8, 8, 10);
+    generateTable(currentRows, currentCols, currentMines);
 });
 
 function checkWin() {
